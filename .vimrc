@@ -1,24 +1,20 @@
-"turn on syntax highlighting 
-:syntax on
-
-"autoindent on
-:set ai
-
-"show matching bracket
-:set showmatch
-
-"these characters can move past end of line
-:set whichwrap=b,s,h,l
-
-"default tabs are too wide
-:set tabstop=6 
-
-"version number.
-:version 5.2
-
-"let bash_is_sh = 1
-"let is_bash = 1
-
+syn on
+syn sync fromstart
+set foldmethod=syntax
+set background=dark
+set foldenable
+"    let javaScript_fold=1
+"    let javascript_fold=1
+    let perl_fold=1
+    let r_syntax_folding=1
+    let ruby_fold=1
+    let sh_fold_enabled=1
+    let vimsyn_folding='af'
+    let xml_syntax_folding=1
+set hlsearch
+set tabstop=4
+set shiftwidth=4
+set expandtab
 " I always use vim against a black background.
 set background=dark
 
@@ -88,8 +84,22 @@ let z = match(X, "#!/bin/sh" )
 if (y != -1)
 	so ~/.vim/syntax/bash.vim
 elseif (z != -1)
-	so ~/vim/syntax/sh.vim
+	so ~/.vim/syntax/sh.vim
 endif
 unlet X
 unlet y
 unlet z
+if has("autocmd")
+    filetype plugin indent on
+endif
+
+" automatically remove trailing whitespace before write
+function! StripTrailingWhitespace()
+    normal mZ
+    %s/\s\+$//e
+    if line("'Z") != line(".")
+        echo "Stripped whitespace\n"
+    endif
+    normal `Z
+endfunction
+autocmd BufWritePre COMMIT_EDITMSG,.vimrc,*.js,*.cpp,*.hpp,*.i,*.h,*.c :call StripTrailingWhitespace()

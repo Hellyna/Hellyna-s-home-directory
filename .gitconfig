@@ -1,3 +1,5 @@
 [user]
-	name = Hellyna Ng
 	email = hellyna@hellyna.com
+	name = Hellyna Ng
+[color]
+	ui = auto
