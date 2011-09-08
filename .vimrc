@@ -103,4 +103,5 @@ function! StripTrailingWhitespace()
     endif
     normal `Z
 endfunction
-autocmd BufWritePre COMMIT_EDITMSG,.vimrc,*.js,*.cpp,*.hpp,*.i,*.h,*.c :call StripTrailingWhitespace()
+" autocmd BufWritePre COMMIT_EDITMSG,.vimrc,*.js,*.cpp,*.hpp,*.i,*.h,*.c :call StripTrailingWhitespace()
+autocmd BufWritePre * :call StripTrailingWhitespace()
