@@ -58,10 +58,10 @@ pacman() {
             /usr/bin/sudo $HOME/.opt/bin/pacman-install $@
             ;;
         -R* | -U* | -D*)
-            /usr/bin/sudo /usr/bin/pacman "$@"
+            /usr/bin/sudo /usr/bin/pacman-color "$@"
             ;;
         *)
-		    /usr/bin/pacman "$@"
+		    /usr/bin/pacman-color "$@"
             ;;
 	esac
 }
