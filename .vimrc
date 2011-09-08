@@ -1,3 +1,4 @@
+set nocompatible
 syn on
 syn sync fromstart
 set foldmethod=syntax
@@ -24,9 +25,9 @@ au  BufNewFile,BufReadPost *.spec  so ~/vim/spec.vim
 augroup END
 
 " The main changes I make to the colours is make Function a tad brighter so
-" it's more readable. Also, I prefer darkcyan for my comments. I don't 
+" it's more readable. Also, I prefer darkcyan for my comments. I don't
 " like comments to be "louder" than the actual code.
-" THis is a hack of the clour section in 
+" THis is a hack of the clour section in
 " /usr/local/share/vim/syntax/syntax.vim
 
 if &background == "dark"
@@ -34,7 +35,7 @@ if &background == "dark"
   hi Constant	term=underline 	ctermfg=Magenta 		guifg=Magenta
   hi Special	term=bold 		ctermfg=DarkMagenta	guifg=Red
   hi Identifier term=underline 	cterm=bold 			ctermfg=Cyan guifg=#40ffff
-  hi Statement term=bold 		ctermfg=Yellow gui=bold	guifg=#aa4444 
+  hi Statement term=bold 		ctermfg=Yellow gui=bold	guifg=#aa4444
   hi PreProc	term=underline 	ctermfg=LightBlue 	guifg=#ff80ff
   hi Type	term=underline 		ctermfg=LightGreen 	guifg=#60ff60 gui=bold
   hi Function	term=bold		ctermfg=White guifg=LightRed

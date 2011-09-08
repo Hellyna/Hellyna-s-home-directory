@@ -14,8 +14,8 @@ if [ -d ${HOME}/.opt/bin ]; then
     PATH=${PATH}:${HOME}/.opt/bin
 fi
 
-#if [ -d ${HOME}/.opt/install/bin ]; then 
-#    PATH=${PATH}:${HOME}/.opt/install/bin 
+#if [ -d ${HOME}/.opt/install/bin ]; then
+#    PATH=${PATH}:${HOME}/.opt/install/bin
 #fi
 
 #if test -d ${HOME}/.opt/src/depot_tools; then
@@ -43,14 +43,26 @@ complete -cf sudo
 
 WHICH="/usr/bin/which"
 
-$WHICH clyde > /dev/null 2>&1
+$WHICH pacman > /dev/null 2>&1
 if test $? -eq 0; then
-clyde() {
-	case $1 in 
-		-S | -S[^sih]* | -R* | -U*)
-		/usr/bin/sudo /usr/bin/clyde "$@" ;;
-        	*)
-		/usr/bin/clyde "$@" ;;
+pacman() {
+	case $1 in
+        -Syu)
+            /usr/bin/sudo /usr/bin/pacman -Sy
+            /usr/bin/sudo $HOME/.opt/bin/pacman-upgrade
+            ;;
+        -Su)
+            /usr/bin/sudo $HOME/.opt/bin/pacman-upgrade
+            ;;
+        -S)
+            /usr/bin/sudo $HOME/.opt/bin/pacman-install $@
+            ;;
+        -R* | -U* | -D*)
+            /usr/bin/sudo /usr/bin/pacman "$@"
+            ;;
+        *)
+		    /usr/bin/pacman "$@"
+            ;;
 	esac
 }
 fi
@@ -97,7 +109,7 @@ function __prompt_time {
     local prompt_time_color="\[\033[1;34m\]"
     if test "$TERM" = "linux"; then
         prompt_time_color="\[\033[1;34m\]"
-    fi 
+    fi
     echo "${prompt_time_color}\@\[\033[0m\]"
 }
 
@@ -153,4 +165,3 @@ function __prompt_command {
 export PROMPT_COMMAND='__prompt_command'
 
 export PATH
-
